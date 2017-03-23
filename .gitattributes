@@ -1,0 +1,5 @@
+*.mat -crlf -diff -merge
+*.mexw64 -crlf -diff -merge
+*.mexw32 -crlf -diff -merge
+*.dll binary
+*.lib binary
