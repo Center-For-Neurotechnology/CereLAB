@@ -153,6 +153,13 @@ BResult configureStimulusPattern(BStimulator* cerestim, BConfig configID,
     return res;
 }
 
+BResult readSequenceStatus(BStimulator* cerestim, BSequenceStatus* status)
+{
+    BResult res = BSUCCESS;
+    res = cerestim->readSequenceStatus(status);
+    return res;
+}
+
 BResult readStimulusPattern(BStimulator* cerestim, BStimulusConfiguration * stimconfig, BConfig configID)
 {
     BResult res = BSUCCESS;    
@@ -380,6 +387,18 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         res = configureStimulusPattern(cerestim, configID, afcf, pulses, 
                 amp1, amp2, width1, width2, frequency, interphase);
         plhs[0] = mxCreateDoubleScalar(res);
+        return;
+    }
+    
+    // ReadSequenceStatus
+    if (!strcmp("readSequenceStatus", cmd)) {
+        // Check parameters
+        if (nlhs < 0 || nrhs < 2)
+            mexErrMsgTxt("readSequenceStatus: Unexpected arguments.");
+        BSequenceStatus * output;
+        // Call the method
+        res = readSequenceStatus(cerestim, output);
+        plhs[0] = mxCreateDoubleScalar(output->status);
         return;
     }
     

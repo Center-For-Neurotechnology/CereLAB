@@ -41,6 +41,8 @@ classdef BStimulator < handle
     %       - Pauses a stimulation script
     %   configureStimulusPattern(BStimulator, waveformID, polarity, pulses, amp1, amp2, width1, width2, frequency, interphase)
     %       - Configures a stimulation waveform
+    %   readSequenceStatus(BStimulator)
+    %       - Reads current status of stimulator
     %   readStimulusPattern(BStimulator, waveformID)
     %       - Reads back a stimulation waveform
     %   triggerStimulus(BStimulator, triggertype)
@@ -523,6 +525,61 @@ classdef BStimulator < handle
         %       res = pause(cerestim);
         %       res = play(cerestim, 100);
             res = BStimulator_mex('configureStimulusPattern',this.objectHandle,varargin{:});
+        end
+        
+        %% Read Sequence Status - read one of 
+        function status = readSequenceStatus(this,verbose)
+        % function stimconfig = readStimulusPattern(cerestim)
+        %   Queries the cerestim and determines its current status
+        %
+        %   Inputs:
+        %       cerestim    a stimulator object created by the
+        %                   BStimulator() method and connected with
+        %                   connect()
+        %       verbose     optional flag for debugging.  If verbose = 1,
+        %                   the function will output a written description 
+        %                   of the stimulator status
+        %
+        %   Outputs:
+        %       status      an integer with values corresponding to the
+        %                   stimulator status as follows:
+        %                   0   STOP    The stimulator is stopped
+        %                   1   PAUSE   The stimulator is paused
+        %                   2   PLAYING The stimulator is actively
+        %                               delivering a stimulus
+        %                   3   WRITING A sequence is being written to the
+        %                               stimulator
+        %                   4   TRIGGER The stimulator is waiting for a
+        %                               trigger on its trigger line
+        %                   5   INVALID Invalid Sequence
+        %
+        %   Example:
+        %       cerestim = BStimulator();
+        %       connect(cerestim)
+        %       status = readSequenceStatus(cerestim)
+            if (nargin < 2)
+                verbose = 0;
+            end            
+            status = BStimulator_mex('readSequenceStatus',this.objectHandle);
+            
+            if (verbose == 1)
+                switch status
+                    case 0
+                        disp('The stimulator is stopped.')
+                    case 1
+                        disp('The stimulator is paused.')
+                    case 2
+                        disp('The stimulator is playing.')
+                    case 3
+                        disp('The stimulator is writing.')
+                    case 4
+                        disp('The stimulator is waiting for a trigger.')
+                    case 5
+                        disp('Invalid Sequence.')
+                    otherwise
+                        disp('Error: unknown status.')
+                end
+            end
         end
         
         %% Read Stimulus Pattern - read one of 16 possible stimulus patterns
