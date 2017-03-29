@@ -21,7 +21,7 @@ for n = 1:ntrials
     
     for p = randperm(length(pairs))      
         res = beginningOfSequence(cerestim);
-        res = wait(cerestim,2500);
+        res = wait(cerestim,1750+randi(500));
         res = beginningOfGroup(cerestim);
         res = autoStimulus(cerestim, pairs(p,1), 1);
         res = autoStimulus(cerestim, pairs(p,2), 2);
