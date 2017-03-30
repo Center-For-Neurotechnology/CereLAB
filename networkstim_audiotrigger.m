@@ -8,6 +8,8 @@ if connx < 0
     error('Can''t connect to cerestim')
 end
 
+c = onCleanup(@()cleanupfunction(cerestim));
+
 pause on
 
 res = configureStimulusPattern(cerestim, 1, 'AF', 1, ...
@@ -22,6 +24,7 @@ for n = 1:ntrials
     for p = randperm(length(pairs))      
         res = beginningOfSequence(cerestim);
         res = wait(cerestim,1750+randi(500));
+        %res = wait(cerestim,2000);
         res = beginningOfGroup(cerestim);
         res = autoStimulus(cerestim, pairs(p,1), 1);
         res = autoStimulus(cerestim, pairs(p,2), 2);
@@ -34,7 +37,7 @@ for n = 1:ntrials
         while (stimd == 0)
             tic
             res = cerestim.readSequenceStatus();
-            if toc > 2
+            if toc > 1
                 stimd = 1;
                 fprintf('Stimulation complete.\n');
             end
@@ -52,4 +55,14 @@ delete(cerestim);
         
     
 end
+
+function cleanupfunction(cerestim)
+
+res = cerestim.stopTriggerStimulus();
+disconnect(cerestim);
+delete(cerestim);
+
+end
+
+
 
