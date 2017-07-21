@@ -107,7 +107,7 @@ for tr = randidx
     
     fprintf(logfile,'%d\t%d\t%d\n\r',trial,freqs(tr),dels(tr));
     fprintf(logfile,'\n\r');
-    sprintf('Trial %d, Frequency %d, Delay %d\n',trial,freqs(tr),dels(tr))
+    disp(sprintf('Trial %d, Frequency %d, Delay %d\n',trial,freqs(tr),dels(tr)))
     trial = trial+1;
     
     pause(intertrialinterval);
