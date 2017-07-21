@@ -42,8 +42,8 @@ if connx < 0
 end
 
 filename = datestr(now);
-filename = replace(filename,' ','_');
-filename = replace(filename,':','-');
+filename = strrep(filename,' ','_');
+filename = strrep(filename,':','-');
 logfile = fopen(['C:/Stimulation/' filename '.txt'], 'a');
 fprintf(logfile,'Logfile for %s\n\r',filename);
 fprintf(logfile,'\n\r');
@@ -97,7 +97,9 @@ for tr = randidx
     res = beginningOfGroup(cerestim);
     res = autoStimulus(cerestim, stimchans(1), 3);
     res = autoStimulus(cerestim, stimchans(2), 4);
+    res = endOfGroup(cerestim);
     res = wait(cerestim, dels(tr));
+    res = beginningOfGroup(cerestim);
     res = autoStimulus(cerestim, stimchans(1), 1);
     res = autoStimulus(cerestim, stimchans(2), 2);
     res = endOfGroup(cerestim);
