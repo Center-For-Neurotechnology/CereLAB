@@ -15,7 +15,7 @@ delays = [ 150 ...
        
 intertrialinterval = 5; % in seconds
 
-numtrials = 5; 
+numtrials = 2; 
 
 stimamplitude = 7000; %in mA
 
@@ -45,21 +45,36 @@ filename = datestr(now);
 filename = replace(filename,' ','_');
 filename = replace(filename,':','-');
 logfile = fopen(['C:/Stimulation/' filename '.txt'], 'a');
-fprintf(logfile,'Logfile for %s\n\r\n\r',filename);
+fprintf(logfile,'Logfile for %s\n\r',filename);
+fprintf(logfile,'\n\r');
+fprintf(logfile,'\n\r');
 fprintf(logfile,'Frequencies:\n\r');
+fprintf(logfile,'\n\r');
 for i = 1:length(frequencies)
     fprintf(logfile,'%d\t',frequencies(i));
 end
-fprintf(logfile,'\n\r\n\rDelays\n\r');
+fprintf(logfile,'\n\r');
+fprintf(logfile,'\n\r');
+fprintf(logfile,'Delays\n\r');
+fprintf(logfile,'\n\r');
 for i = 1:length(delays)
     fprintf(logfile,'%d\t',delays(i));
 end
-fprintf(logfile,'\n\r\n\rInter-trial Interval is %d seconds\n\r',intertrialinterval);
+fprintf(logfile,'\n\r');
+fprintf(logfile,'\n\r');
+fprintf(logfile,'Inter-trial Interval is %d seconds.\n\r',intertrialinterval);
+fprintf(logfile,'\n\r');
 fprintf(logfile,'Number of trials per condition is %d.\n\r',numtrials);
+fprintf(logfile,'\n\r');
 fprintf(logfile,'Stimulation amplitude is %d mA.\n\r',stimamplitude);
+fprintf(logfile,'\n\r');
 fprintf(logfile,'Stimulation channels are %d-%d.\n\r',stimchans(1), stimchans(2));
+fprintf(logfile,'\n\r');
 fprintf(logfile,'Stimulation train length is %d ms.\n\r\n\r',trainlength);
+fprintf(logfile,'\n\r');
+fprintf(logfile,'\n\r');
 fprintf(logfile,'Trial\tFrequency\tDelay\n\r');
+fprintf(logfile,'\n\r');
 
 pause on
 
@@ -91,7 +106,9 @@ for tr = randidx
     res = play(cerestim,1);
     
     fprintf(logfile,'%d\t%d\t%d\n\r',trial,freqs(tr),dels(tr));
+    fprintf(logfile,'\n\r');
     sprintf('Trial %d, Frequency %d, Delay %d\n',trial,freqs(tr),dels(tr))
+    trial = trial+1;
     
     pause(intertrialinterval);
     
