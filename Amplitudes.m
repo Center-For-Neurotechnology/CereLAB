@@ -21,7 +21,7 @@ for tr = 1:5
     cerestim.endOfSequence();
     cerestim.play(1);
 end
-save MG101_amplitudes.mat amplitudes
+save MG_amplitudes.mat amplitudes
 for i = 1:7
     res = configureStimulusPattern(cerestim, 2*i-1, 'AF', 1, 3500 + 500*i, 3500 + 500*i, 90, 90, 1000, 53);
     res = configureStimulusPattern(cerestim, 2*i, 'CF', 1, 3500 + 500*i, 3500 + 500*i, 90, 90, 1000, 53);
@@ -40,7 +40,7 @@ for tr = 1:5
     cerestim.endOfSequence();
     cerestim.play(1);
 end
-save MG101_amplitudes.mat amplitudes
+save MG_amplitudes.mat amplitudes
 for i = 1:6
     res = configureStimulusPattern(cerestim, 2*i-1, 'AF', 1, 7000 + 500*i, 7000 + 500*i, 90, 90, 1000, 53);
     res = configureStimulusPattern(cerestim, 2*i, 'CF', 1, 7000 + 500*i, 7000 + 500*i, 90, 90, 1000, 53);
@@ -61,7 +61,7 @@ for tr = 1:5
 end
 
 %%CHANGE THE NAME HERE PLEASE
-save MG104_amplitudes_RMT1011.mat amplitudes
+save MG110_amplitudes_RMT1011.mat amplitudes
 
 disconnect(cerestim);
 delete(cerestim);
