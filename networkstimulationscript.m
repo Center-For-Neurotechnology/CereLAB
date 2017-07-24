@@ -32,6 +32,11 @@
 
 addpath(genpath('C:/Stimulation'))
 
+filename = datestr(now);
+filename = strrep(filename,' ','_');
+filename = strrep(filename,':','-');
+diary(['C:/Stimulation/NetworkSweep-' filename]);
+
 pairs = [33 41; ... % GR 33 41
         49 57; ... % GR 49 57
         34 42; ... % GR 34 42
@@ -50,4 +55,7 @@ pairs = [33 41; ... % GR 33 41
 
 ntrials = 20;
 
-res = networktest(pairs, ntrials)
+res = networktest(pairs, ntrials);
+
+diary off
+
