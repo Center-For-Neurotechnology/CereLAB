@@ -1,4 +1,4 @@
-function res = networktest(pairs, ntrials)
+function stimchans = networktest(pairs, ntrials)
 
 
 cerestim = BStimulator();
@@ -17,6 +17,8 @@ res = configureStimulusPattern(cerestim, 1, 'AF', 1, ...
 res = configureStimulusPattern(cerestim, 2, 'CF', 1, ...
     7000, 7000, 90, 90, 100, 53);
 
+stimchans = zeros(ntrials*length(pairs),2);
+currtrial = 1;
 
 for n = 1:ntrials
     fprintf('Trial %g.\n',n);
@@ -29,6 +31,8 @@ for n = 1:ntrials
         res = endOfSequence(cerestim);
         
         fprintf('Stimulating at pair %g - %g.\n',pairs(p,1),pairs(p,2));
+        stimchans(currtrial,:) = pairs(p,:);
+        currtrial = currtrial + 1;
         res = cerestim.play(1);
         fprintf('Pausing for %g s.\n',3)
         pause(3);

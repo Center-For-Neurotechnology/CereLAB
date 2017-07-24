@@ -35,7 +35,7 @@ addpath(genpath('C:/Stimulation'))
 filename = datestr(now);
 filename = strrep(filename,' ','_');
 filename = strrep(filename,':','-');
-diary(['C:/Stimulation/NetworkSweep-' filename]);
+diary(['C:/Stimulation/NetworkSweepLog-' filename]);
 
 pairs = [33 41; ... % GR 33 41
         49 57; ... % GR 49 57
@@ -55,7 +55,8 @@ pairs = [33 41; ... % GR 33 41
 
 ntrials = 20;
 
-res = networktest(pairs, ntrials);
+stimchans = networktest(pairs, ntrials);
 
 diary off
 
+save(['C:/Stimulation/NetworkSweepChans-' filename '.mat'],stimchans)
