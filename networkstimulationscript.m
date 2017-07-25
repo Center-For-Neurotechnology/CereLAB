@@ -37,7 +37,7 @@ filename = strrep(filename,' ','_');
 filename = strrep(filename,':','-');
 diary(['C:/Stimulation/NetworkSweepLog-' filename]);
 
-pairs = [33 41; ... % GR 33 41
+pairs = [...
         49 57; ... % GR 49 57
         34 42; ... % GR 34 42
         50 58; ... % GR 50 58
@@ -50,7 +50,6 @@ pairs = [33 41; ... % GR 33 41
         54 62; ... % GR 54 62
         39 47; ... % GR 39 47
         55 63; ... % GR 55 63
-        56 64; ... % GR 56 64
 	 ];
 
 ntrials = 20;
