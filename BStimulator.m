@@ -524,6 +524,12 @@ classdef BStimulator < handle
         %       res = play(cerestim, 100);
         %       res = pause(cerestim);
         %       res = play(cerestim, 100);
+        
+            if (varargin{8} < 16)
+                res = -1;
+                error('Frequency must be greater than 15 Hz, or else you have to manually program it')
+            end
+            
             res = BStimulator_mex('configureStimulusPattern',this.objectHandle,varargin{:});
         end
         

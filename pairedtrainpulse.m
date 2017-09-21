@@ -15,7 +15,7 @@ delays = [ 150 ...
        
 intertrialinterval = 5; % in seconds
 
-numtrials = 2; 
+numtrials = 5; 
 
 stimamplitude = 7000; %in mA
 
@@ -86,27 +86,61 @@ res = configureStimulusPattern(cerestim, 2, 'CF', 1, ...
 trial = 1;
 for tr = randidx
     
-    res = configureStimulusPattern(cerestim, 3, 'AF', ...
-        floor(freqs(tr)*trainlength/1000), stimamplitude, stimamplitude, ...
-        90, 90, freqs(tr), 53);
-    res = configureStimulusPattern(cerestim, 4, 'CF', ...
-        floor(freqs(tr)*trainlength/1000), stimamplitude, stimamplitude, ...
-        90, 90, freqs(tr), 53);
-    
-    res = beginningOfSequence(cerestim);
-    res = beginningOfGroup(cerestim);
-    res = autoStimulus(cerestim, stimchans(1), 3);
-    res = autoStimulus(cerestim, stimchans(2), 4);
-    res = endOfGroup(cerestim);
-    res = wait(cerestim, dels(tr));
-    res = beginningOfGroup(cerestim);
-    res = autoStimulus(cerestim, stimchans(1), 1);
-    res = autoStimulus(cerestim, stimchans(2), 2);
-    res = endOfGroup(cerestim);
-    res = endOfSequence(cerestim);
-    
-    res = play(cerestim,1);
-    
+    if (freqs(tr) > 15)
+        res = configureStimulusPattern(cerestim, 3, 'AF', ...
+            floor(freqs(tr)*trainlength/1000), stimamplitude, stimamplitude, ...
+            90, 90, freqs(tr), 53);
+        res = configureStimulusPattern(cerestim, 4, 'CF', ...
+            floor(freqs(tr)*trainlength/1000), stimamplitude, stimamplitude, ...
+            90, 90, freqs(tr), 53);
+
+        res = beginningOfSequence(cerestim);
+        res = beginningOfGroup(cerestim);
+        res = autoStimulus(cerestim, stimchans(1), 3);
+        res = autoStimulus(cerestim, stimchans(2), 4);
+        res = endOfGroup(cerestim);
+        res = wait(cerestim, dels(tr));
+        res = beginningOfGroup(cerestim);
+        res = autoStimulus(cerestim, stimchans(1), 1);
+        res = autoStimulus(cerestim, stimchans(2), 2);
+        res = endOfGroup(cerestim);
+        res = endOfSequence(cerestim);
+
+        res = play(cerestim,1);
+    else
+        res = configureStimulusPattern(cerestim, 3, 'AF', ...
+            1, stimamplitude, stimamplitude, ...
+            90, 90, 1000/(1000/freqs(tr) - floor(1000/freqs(tr))+1), 53);
+        res = configureStimulusPattern(cerestim, 4, 'CF', ...
+            1, stimamplitude, stimamplitude, ...
+            90, 90, 1000/(1000/freqs(tr) - floor(1000/freqs(tr))+1), 53);
+        
+        res = beginningOfSequence(cerestim);
+        res = beginningOfGroup(cerestim);
+        res = autoStimulus(cerestim, stimchans(1), 3);
+        res = autoStimulus(cerestim, stimchans(2), 4);
+        res = endOfGroup(cerestim);
+        res = wait(cerestim, floor(1000/freqs(tr))-1);
+        res = endOfSequence(cerestim);
+        
+        res = play(cerestim,floor(freqs(tr)*trainlength/1000));
+        
+        status = readSequenceStatus(cerestim);
+        while (status == 2)
+            status = readSequenceStatus(cerestim);
+        end
+        
+        res = beginningOfSequence(cerestim);
+        res = wait(cerestim, dels(tr));
+        res = beginningOfGroup(cerestim);
+        res = autoStimulus(cerestim, stimchans(1), 1);
+        res = autoStimulus(cerestim, stimchans(2), 2);
+        res = endOfGroup(cerestim);
+        res = endOfSequence(cerestim);
+        
+        res = play(cerestim,1);
+    end
+            
     fprintf(logfile,'%d\t%d\t%d\n\r',trial,freqs(tr),dels(tr));
     fprintf(logfile,'\n\r');
     disp(sprintf('Trial %d, Frequency %d, Delay %d\n',trial,freqs(tr),dels(tr)))
