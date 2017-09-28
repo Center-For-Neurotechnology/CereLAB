@@ -8,7 +8,12 @@ if connx < 0
     error('Can''t connect to cerestim')
 end
 
-c = onCleanup(@()cleanupfunction(cerestim));
+filename = datestr(now);
+filename = strrep(filename,' ','_');
+filename = strrep(filename,':','-');
+logfile = fopen(['C:/Stimulation/Network-' filename '.txt'], 'a');
+
+c = onCleanup(@()cleanupfunction(cerestim,logfile));
 
 pause on
 
@@ -19,6 +24,12 @@ res = configureStimulusPattern(cerestim, 2, 'CF', 1, ...
 
 stimchans = zeros(ntrials*length(pairs),2);
 currtrial = 1;
+
+fprintf(logfile,'Logfile for Network %s\n\r',filename);
+fprintf(logfile,'\n\r');
+fprintf(logfile,'\n\r');
+fprintf(logfile,'Trial\tChannel1\tChannel2\n\r');
+fprintf(logfile,'\n\r');
 
 for n = 1:ntrials
     fprintf('Trial %g.\n',n);
@@ -31,6 +42,8 @@ for n = 1:ntrials
         res = endOfSequence(cerestim);
         
         fprintf('Stimulating at pair %g - %g.\n',pairs(p,1),pairs(p,2));
+        fprintf(logfile,'%d\t%d\t%d\n\r',n,pairs(p,1),pairs(p,2));
+        fprintf(logfile,'\n\r');
         stimchans(currtrial,:) = pairs(p,:);
         currtrial = currtrial + 1;
         res = cerestim.play(1);
@@ -41,17 +54,14 @@ for n = 1:ntrials
         
     end
 end
-
-disconnect(cerestim);
-delete(cerestim);
         
-    
 end
 
-function cleanupfunction(cerestim)
+function cleanupfunction(cerestim,logfile)
 
 disconnect(cerestim);
 delete(cerestim);
+fclose(logfile);
 
 end
 
