@@ -1,6 +1,6 @@
 %% Needs to be Manually Edited Every Time!
 
-pID = 'MG110';
+pID = 'MG112';
 data_dir = ['C:\Britni\Data\' pID];
 cd(data_dir)
 
@@ -12,7 +12,7 @@ subj_dir = [data_dir '\' filename];
 
 mkdir(subj_dir)
 
-files = {'20170410-090845-001'};
+files = {'01-144711-003','01-144711-004','02-144740-003','02-144740-004'};
 
 k = 0;
 
@@ -45,7 +45,7 @@ for i = 1:k
 end
 
 data = [];
-for i = [1:3 5:7]
+for i = [3:4]
     load([subj_dir '\' filename '_' num2str(i) '.mat'])
     if isempty(data)
         data = partialdata;
@@ -58,10 +58,10 @@ for i = [1:3 5:7]
     end
     clear partialdata
 end
-save([subj_dir '\' filename '.mat'], 'data', '-v7.3')
+save([subj_dir '\' filename '-02.mat'], 'data', '-v7.3')
 
 stimbystim{1}.data = data.Data;
-save([subj_dir '\' filename '_stimbystim.mat'], 'stimbystimdata', '-v7.3')
+save([subj_dir '\' filename '_stimbystim-02.mat'], 'stimbystim', '-v7.3')
 
 %% Find the stimulation artifacts using triggers and reorganize the data accordingly
 

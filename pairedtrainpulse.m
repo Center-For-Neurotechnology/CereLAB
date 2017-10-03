@@ -44,8 +44,8 @@ end
 filename = datestr(now);
 filename = strrep(filename,' ','_');
 filename = strrep(filename,':','-');
-logfile = fopen(['C:/Stimulation/' filename '.txt'], 'a');
-fprintf(logfile,'Logfile for %s\n\r',filename);
+logfile = fopen(['C:/Stimulation/TrainPlusPulse-' filename '.txt'], 'a');
+fprintf(logfile,'Logfile for TrainPlusPulse %s\n\r',filename);
 fprintf(logfile,'\n\r');
 fprintf(logfile,'\n\r');
 fprintf(logfile,'Frequencies:\n\r');
