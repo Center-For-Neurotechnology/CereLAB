@@ -1,7 +1,19 @@
 function res = singlepulses(stimchans,ntrials)
+%function res = singlepulses(stimchans,ntrials)
+%
+%   This function runs single pulses in both polarities for a total
+%   of ntrials*2 trials.  It will take about ntrials/10 minutes to run.
+%
+%   INPUTS
+%
+%   stimchans       a 1x2 matrix containing the channel numbers according
+%                   to the cerestim channel reference scheme (relative to
+%                   banks A, B, C)
+%   ntrials         a single number, the trials to be run.  The program
+%                   will actually run ntrials*2 trials.
 
 cerestim = BStimulator();
-connect(cerestim);
+connx = connect(cerestim);
 
 if connx < 0
     error('Can''t connect to cerestim')
