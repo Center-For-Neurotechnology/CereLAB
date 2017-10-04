@@ -17,7 +17,7 @@ intertrialinterval = 5; % in seconds
 
 numtrials = 5; 
 
-stimamplitude = 7000; %in mA
+stimamplitude = 7000; %in uA
 
 stimchans = [1 2]; 
 

@@ -1,7 +1,7 @@
 function amps = Amplitudes(stimchans)
 
 cerestim = BStimulator();
-connect(cerestim);
+connx = connect(cerestim);
 
 if connx < 0
     error('Can''t connect to cerestim')
