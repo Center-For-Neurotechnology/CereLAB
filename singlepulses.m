@@ -1,7 +1,7 @@
 function res = singlepulses(stimchans,ntrials)
 
 cerestim = BStimulator();
-connx = connect(cerestim);
+connect(cerestim);
 
 if connx < 0
     error('Can''t connect to cerestim')
