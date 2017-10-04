@@ -2,12 +2,14 @@ function stimchans = networktest(pairs, ntrials)
 %function stimchans = networktest(pairs, ntrials)
 %
 %   Runs the "network" experiment, where it pseudo-randomly selects
-%   channels from the pairs list to stimulate with single pulses.
+%   channels from the pairs list to stimulate with single pulses.  Assuming
+%   20 trials (the standard), the program will take one minute per
+%   stimulation pair to run.
 %
 %   INPUTS
 %
 %   pairs       an nx2 matrix with the channel pairs to be stimulated
-%   ntrials     an
+%   ntrials     an integer with the number of trials to run (usually 20)
 
 cerestim = BStimulator();
 connx = connect(cerestim);
