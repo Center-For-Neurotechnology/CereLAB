@@ -66,7 +66,7 @@ for tr = 1:10
         cerestim.endOfGroup();
         cerestim.wait(2500+randi(500));
         amps(1,70+(tr-1)*7+amp) = 3500 + 500*order(amp);
-        fprintf(logfile,'%d\t%d\n\r',35+(tr-1)*7+amp,500*order(amp));
+        fprintf(logfile,'%d\t%d\n\r',35+(tr-1)*7+amp,3500+500*order(amp));
         fprintf(logfile,'\n\r');
     end
     cerestim.endOfSequence();
@@ -87,7 +87,7 @@ for tr = 1:10
         cerestim.endOfGroup();
         cerestim.wait(2500+randi(500));
         amps(1,140+(tr-1)*6+amp) = 7000 + 500*order(amp);
-        fprintf(logfile,'%d\t%d\n\r',70+(tr-1)*7+amp,500*order(amp));
+        fprintf(logfile,'%d\t%d\n\r',70+(tr-1)*7+amp,7000+500*order(amp));
         fprintf(logfile,'\n\r');
     end
     cerestim.endOfSequence();
