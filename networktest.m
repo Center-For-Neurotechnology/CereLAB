@@ -40,7 +40,8 @@ fprintf(logfile,'\n\r');
 fprintf(logfile,'\n\r');
 fprintf(logfile,'Trial\tChannel1\tChannel2\n\r');
 fprintf(logfile,'\n\r');
-
+TrialTotal=ntrials*size(pairs,1);
+count=1;
 for n = 1:ntrials
     fprintf('Trial %g.\n',n);
     for p = randperm(length(pairs))     
@@ -57,8 +58,11 @@ for n = 1:ntrials
         stimchans(currtrial,:) = pairs(p,:);
         currtrial = currtrial + 1;
         res = cerestim.play(1);
-        fprintf('Pausing for %g s.\n',3)
-        pause(3);
+        
+        disp([ num2str(count),' of ',num2str(TrialTotal),' trials ',num2str(pairs(p,1)),'-',num2str(pairs(p,2))])
+count=count+1;
+        fprintf('Pausing for %g s.\n',5)
+        pause(5);
         
         fprintf('\n')
         

@@ -30,26 +30,33 @@ fprintf(logfile,'\n\r');
 fprintf(logfile,'Trial\tAmplitude\n\r');
 fprintf(logfile,'\n\r');
 
+pause on
+
 amps = zeros(1,200);
 for i = 1:7
     res = configureStimulusPattern(cerestim, 2*i-1, 'AF', 1, 500*i, 500*i, 90, 90, 1000, 53);
     res = configureStimulusPattern(cerestim, 2*i, 'CF', 1, 500*i, 500*i, 90, 90, 1000, 53);
 end
+TrialTotal=70;
 for tr = 1:10
     order = randperm(7);
-    cerestim.beginningOfSequence();
+    
     for amp = 1:7
+        cerestim.beginningOfSequence();
         cerestim.beginningOfGroup();
         cerestim.autoStimulus(stimchans(1),order(amp)*2-1);
         cerestim.autoStimulus(stimchans(2),order(amp)*2);
         cerestim.endOfGroup();
-        cerestim.wait(2500+randi(500));
+        cerestim.endOfSequence();
+        cerestim.play(1);
+        pause((3000+randi(500))./1000);
+        %cerestim.wait(2500+randi(500));
         amps(1,(tr-1)*7+amp) = 500*order(amp);
         fprintf(logfile,'%d\t%d\n\r',(tr-1)*7+amp,500*order(amp));
         fprintf(logfile,'\n\r');
+        disp([ num2str(tr),' of ',num2str(TrialTotal),' trials, low tier ',num2str(1*500*order(amp))])
     end
-    cerestim.endOfSequence();
-    cerestim.play(1);
+    
 end
 
 for i = 1:7
@@ -58,19 +65,23 @@ for i = 1:7
 end
 for tr = 1:10
     order = randperm(7);
-    cerestim.beginningOfSequence();
+    
     for amp = 1:7
+        cerestim.beginningOfSequence();
         cerestim.beginningOfGroup();
         cerestim.autoStimulus(stimchans(1),order(amp)*2-1);
         cerestim.autoStimulus(stimchans(2),order(amp)*2);
         cerestim.endOfGroup();
-        cerestim.wait(2500+randi(500));
+        cerestim.endOfSequence();
+        cerestim.play(1);
+        pause((3000+randi(500))./1000);
+        %cerestim.wait(2500+randi(500));
         amps(1,70+(tr-1)*7+amp) = 3500 + 500*order(amp);
-        fprintf(logfile,'%d\t%d\n\r',35+(tr-1)*7+amp,3500+500*order(amp));
+        fprintf(logfile,'%d\t%d\n\r',35+(tr-1)*7+amp,500*order(amp));
         fprintf(logfile,'\n\r');
+        disp([ num2str(tr),' of ',num2str(TrialTotal),' trials, middle tier ',num2str(500*order(amp)+3500)])
     end
-    cerestim.endOfSequence();
-    cerestim.play(1);
+    
 end
 
 for i = 1:6
@@ -79,19 +90,23 @@ for i = 1:6
 end
 for tr = 1:10
     order = randperm(6);
-    cerestim.beginningOfSequence();
+    
     for amp = 1:6
+        cerestim.beginningOfSequence();
         cerestim.beginningOfGroup();
         cerestim.autoStimulus(stimchans(1),order(amp)*2-1);
         cerestim.autoStimulus(stimchans(2),order(amp)*2);
         cerestim.endOfGroup();
-        cerestim.wait(2500+randi(500));
+        cerestim.endOfSequence();
+        cerestim.play(1);
+        pause((3000+randi(500))./1000);
+        %cerestim.wait(2500+randi(500));
         amps(1,140+(tr-1)*6+amp) = 7000 + 500*order(amp);
-        fprintf(logfile,'%d\t%d\n\r',70+(tr-1)*7+amp,7000+500*order(amp));
+        fprintf(logfile,'%d\t%d\n\r',70+(tr-1)*7+amp,500*order(amp));
         fprintf(logfile,'\n\r');
+        disp([ num2str(tr),' of ',num2str(TrialTotal),' trials, top tier ',num2str(500*order(amp)+7000)])
     end
-    cerestim.endOfSequence();
-    cerestim.play(1);
+    
 end
 
 end
