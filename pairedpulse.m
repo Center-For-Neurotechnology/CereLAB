@@ -16,8 +16,8 @@ numtrials = 5;
 
 stimamplitude = 6000; %in uA
 
-stimchans1 = [9 10]; 
-stimchans2 = [9 10;28 29]; 
+stimchans1 = [11 12]; 
+stimchans2 = [11 12;47 48]; 
 
 trainlength = 400; % in mss
 

@@ -1,0 +1,3 @@
+If you get "Waiting..." over and over again from any of these programs, it means the Cerestim is not connected.  The BEST way to debug this probem is to use Stim Manager (there's an icon on the desktop).  Try different USB ports (usually the one on the right closest to the screen works).  If you open Stim Manager and the program says "Cerestim Connected" in the bottom right corner, then you can now use these programs.
+
+Also if the headbox is not connected, the cerestim will remain disconnected.-Kara and Deb

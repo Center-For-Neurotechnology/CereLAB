@@ -1,0 +1,25 @@
+Delay Stim is the PAIRED-PULSE stimulation program.  Double-click to open.
+
+If you get "waiting..." over and over again, read the file waiting.README.
+
+If the cerestim is connected, the first prompt is to enter the amplitude in uA.  So if you want 5 mA stimulation, type 5000 and hit enter.
+
+The next step is to enter the frequency for the stimulation. The program will accept any number between 1 and 200 BUT ANY FREQUENCY GREATER THAN 65 IS EXPERIMENTAL AND MAY NOT WORK AS INTENDED.  It won't be unsafe, but the frequencies/delays may be messed up.
+
+Next, you need to enter the train duration for each trial in ms.  For example, if you want each train to last 1 second, type 1000 and hit enter.
+
+The program assumes you will be using two pairs of electrodes.
+
+For each pair of electrodes, you need to enter the cathode and the anode electrode number.  This number is relative to the cerestim, so if you have the splitter box plugged into bank A in the cerestim, then you would choose a number between 1 and 32.  Unless you are doing something very weird, my guess is that you are choosing one of the first four electrodes.
+
+Once you have entered the cathode and the anode, the program will repeat those numbers back (cathode first, then anode) and ask you to confirm that these are the correct electrodes.  Press 0 for no, or 1 for yes.
+
+Enter the subject ID (e.g. MG95).  The program will append the current time to the log file, so there is no need to worry about duplicating log files.
+
+Once all this information is entered, you have one last check.  If all of the information is correct, press 1 to begin the experiment.  If you messed up, press 0 and the program will stop.  Then you can restart the program and try again.
+
+Once the experiment has started, the program will start spitting out information for each trial.  This information is also being saved in a text file in the same folder.  Trials are 0-indexed, so Trial 0 means you are still finishing the first trial, and trial 5 means you are currently in the 6th trial.
+
+If at any point you want to pause the program, PRESS AND HOLD 0.  If you want to stop, PRESS AND HOLD 1.  
+
+If the program says "waiting to close", to close the program, enter any number and hit enter.
