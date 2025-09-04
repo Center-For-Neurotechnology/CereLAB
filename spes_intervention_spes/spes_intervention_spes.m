@@ -19,7 +19,7 @@
 %% Set Configuration for the three blocks
 
 % first for SOZ
-SOZ_pair = [5,6]; % Bipolar pair corresponding to SOZ location
+SOZ_pair = [,]; % Bipolar pair corresponding to SOZ location
 
 SOZ_amplitude          = 7000; %current amplitude in microamps 
 SOZ_pulsewidth         = 90; % single pulse width per phase in microseconds
