@@ -8,7 +8,7 @@ frequencies = [ 10 ...
                 200 ...
  ];
             
-delays = [0];
+delays = [ 0];
        
 intertrialinterval = 7; % in seconds
 
