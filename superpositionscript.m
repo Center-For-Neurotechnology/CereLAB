@@ -38,9 +38,9 @@ filename = strrep(filename,':','-');
 diary(['C:/Stimulation/Superposition-' filename]);
 
 
-pair_A = [15, 16]; %LTSb7-8
-pair_B = [38, 39]; %LFIa13-14
-pair_C = [69,70]; %LPIb3-4
+pair_A = [15, 16];
+pair_B = [38, 39]; 
+pair_C = [69,70]; 
 
 
 pairs = [pair_A;pair_B;pair_C];
