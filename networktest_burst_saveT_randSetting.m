@@ -25,6 +25,8 @@ filename = strrep(filename,' ','_');
 filename = strrep(filename,':','-');
 filename = strcat(filename, 'Chulab');
 logfile = fopen(['C:/Stimulation/NetworkLogWen-' filename '.txt'], 'a');
+% logfile = fopen(['D:\Dropbox (MGH Chu Lab)\Spike Ripple Projects\Spike Ripple R01 Aim1B Analysis' ...
+%     '\SR_STIM_data\MatlabCode_StimExperiment\TestRun\NetworkParameter-' filename '.txt'], 'a');
 c = onCleanup(@()cleanupfunction(cerestim,logfile));
 
 pause on
@@ -159,6 +161,8 @@ for n = 1:ntrials
     disp([ num2str(count),' of ',num2str(ntrials),' trials ',num2str(pair_current(1)),'-',num2str(pair_current(2))])
     count=count+1;
     save(['C:/Stimulation/ChulablogfileT-' filename '.mat'],'T2save')
+%     save(['D:\Dropbox (MGH Chu Lab)\Spike Ripple Projects\Spike Ripple R01 Aim1B Analysis' ...
+%         '\SR_STIM_data\MatlabCode_StimExperiment\TestRun\ChulablogfileT-' filename '.mat'],'T2save')
 
     fprintf('\n')
 end

@@ -33,14 +33,35 @@
 
 %% Contact Pairs
 %{
-% Network mini 
+% Network mini MG218
 % connecting Box 1A => Cerestim A
 % connecting Box 2A => Cerestim B
-SubjID = '';
+SubjID = 'MG218';
 pairs = [
-
+  4,5;   % Box1A 4-5;   LAMY4-5
+  55,56; % Box2A 87-88; LFI-ANT9-10
+  5,6;   % Box1A 5-6;   LAMY5-6
+  57,58; % Box2A 89-90; LFI-ANT11-12
+  7,8;   % Box3A 7-8;   LAMY7-8
+  59,60; % Box2A 91-92; LFI-ANT13-14
 ];
-
+pairs = [1,2;
+    3,4];
+%}
+% Network mini MG220
+% connecting Box 1A => Cerestim A
+% connecting Box 2A => Cerestim B
+% connecting Box 2B => Cerestim C
+%
+SubjID = 'MG220';
+pairs = [
+  49,50;   % Box2A  81- 82;   RFIa01-02; pOFC
+  81,82;   % Box2B 113-114;   RFIc03-04; sgACC
+  50,51;   % Box2A  82- 83;   RFIa02-03; pOFC
+  79,80;   % Box2B 111-112;   RFIc01-02; sgACC
+  51,52;   % Box2A  83- 84;   RFIa03-04; pOFC
+  80,81;   % Box2B 112-113;   RFIc02-03; sgACC
+];
 % add a string to the filename if you want to distinguish between different runs of the same script
 % filename_add = 'pass-test'; % 20 trials
 filename_add = 'pass-01'; % 20 trials

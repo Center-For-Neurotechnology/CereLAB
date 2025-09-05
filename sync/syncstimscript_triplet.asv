@@ -30,29 +30,48 @@
 % A: Splitter Box 1 Bank 1
 % B: Splitter Box 1 Bank 2
 
-addpath(genpath('C:/Stimulation'))
+path = 'C:/Stimulation';
+
+addpath(genpath(path))
 
 filename = datestr(now);
 filename = strrep(filename,' ','_');
 filename = strrep(filename,':','-');
-diary(['C:/Stimulation/Superposition-' filename]);
+diary([path '/SyncStim-' filename]);
 
 
-pair_A = [15, 16]; %LTSb7-8
-pair_B = [38, 39]; %LFIa13-14
-pair_C = [69,70]; %LPIb3-4
+% pair_A = [35,36]; %RTSaC3-4
+% pair_B = [50,51]; %RTbP2-3
+% pair_C = [74,75]; %RFIcA10-11
 
+% pair_A = [19,20]; %LHH7-8
+% pair_B = [59,60]; %LFI-ANT13-14
+% pair_C = [93,94]; %LPI13-14
+
+pair_A = [22,23]; % RFIa6-7
+pair_B = [45,46]; % RFIb-ANT15-16
+pair_C = [48,49]; % RFIc2-3
 
 pairs = [pair_A;pair_B;pair_C];
-    
+
 ntrials = 20;
-
-intervalsec = 5;
-
+intertrialinterval = 5;
 amplitude = 7000;
 
-stimchans = superposition(pairs, ntrials, intervalsec, amplitude);
+pulses = 1;
+pulsewidth = 90;
+frequency = 100;
+interphase = 53;
+jitterinterval = 1; % no jitter
+
+% redundant params - only for consistency
+trainlength = 0; 
+intervalburstduration = 0;
+delay = 0;
+
+stimchans = syncfunc_triplet(path ,pairs, ntrials, intertrialinterval, amplitude, pulses,pulsewidth,frequency,interphase,trainlength,jitterinterval,intervalburstduration,delay);
+
 
 diary off
 
-save(['C:/Stimulation/Superposition-' filename '.mat'],'stimchans')
+save([path '/SyncStim-' filename '.mat'],'stimchans')
